@@ -8,6 +8,7 @@ namespace BTExample
 
     public class BTSequence : BTBaseNode
     {
+        private int currentIndex = 0;
         private BTBaseNode[] nodes;
         public BTSequence(params BTBaseNode[] inputNodes)
         {
@@ -16,12 +17,12 @@ namespace BTExample
 
         public override BTNodeStatus Run()
         {
-            foreach(BTBaseNode node in nodes)
+            for(; currentIndex < nodes.Length ; currentIndex++){
             {
-                BTNodeStatus result = node.Run();
+                BTNodeStatus result = nodes[currentIndex].Run();
                 switch (result)
                 {
-                    case BTNodeStatus.Failed: return BTNodeStatus.Failed;
+                    case BTNodeStatus.Failed: currentIndex = 0; return BTNodeStatus.Failed;
                     case BTNodeStatus.Success: continue;
                     case BTNodeStatus.Running: return BTNodeStatus.Running;
                 }
