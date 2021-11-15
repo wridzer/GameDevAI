@@ -27,6 +27,7 @@ namespace BTExample
                     case BTNodeStatus.Running: return BTNodeStatus.Running;
                 }
             }
+            currentIndex = 0;
             return BTNodeStatus.Success;
         }
     }
