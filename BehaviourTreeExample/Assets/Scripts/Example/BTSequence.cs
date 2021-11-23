@@ -2,6 +2,25 @@ using UnityEngine;
 
 namespace BTExample
 {
+    
+    public class SomeAI : MonoBehaviour
+    {
+        private BTNode tree;
+        public void Start()
+        {
+            tree =
+                new BTSequence(
+                    new BTWait(2f),
+                    new BTDebug("Hoi")
+                );
+        }
+
+        private void Update()
+        {
+            tree?.OnUpdate();
+        }
+    }
+    
     public abstract class BTNode
     {
         public enum BTResult { Success, Failed, Running }
