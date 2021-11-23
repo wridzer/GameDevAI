@@ -19,11 +19,11 @@ namespace BTExample
         {
             for(; currentIndex < nodes.Length ; currentIndex++){
             {
-                BTNodeStatus result = nodes[currentIndex].Run();
+                BTNodeStatus result = nodes[currentIndex].OnUpdate();
                 switch (result)
                 {
                     case BTNodeStatus.Failed: currentIndex = 0; return BTNodeStatus.Failed;
-                    case BTNodeStatus.Success: continue;
+                    case BTNodeStatus.Success: break;
                     case BTNodeStatus.Running: return BTNodeStatus.Running;
                 }
             }
@@ -58,7 +58,22 @@ namespace BTExample
 
     public abstract class BTBaseNode
     {
+        public virtual void OnEnter(){}
+        public virtual void OnExit(){}
         public abstract BTNodeStatus Run();
+        private bool isInitialized = false;
+        public void BTNodeStatus OnUpdate(){
+            if(!isInitialized){
+                isInitialized = true;
+                OnEnter();
+            }
+            var result = Run();
+            if(result != BTNodeStatus.Running){
+                OnExit();
+                isInitialized = false;
+            }
+            return result;
+        }
     }
 
     public class SomeAI : MonoBehaviour
@@ -83,6 +98,11 @@ namespace BTExample
                         new BTAnimate()
                     )
                 );
+        }
+        
+        public void Update(){
+        
+            behaviourTree?.OnUpdate();
         }
 
     }
