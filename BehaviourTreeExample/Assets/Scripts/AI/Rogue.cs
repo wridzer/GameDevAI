@@ -10,15 +10,35 @@ public class Rogue : MonoBehaviour
     private BTBaseNode tree;
     private NavMeshAgent agent;
     private Animator animator;
+    private BlackBoard blackBoard;
+
+    public GameObject guardInstance;
+    public GameObject[] walls;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
+        blackBoard = new BlackBoard();
     }
 
     private void Start()
     {
         //TODO: Create your Behaviour tree here
+        blackBoard.SetValue<bool>("playerAttacked", true); //set to true for debug purposes, change later
+        blackBoard.SetValue<Vector3>("myPos", gameObject.transform.position);
+        blackBoard.SetValue<Vector3>("guardPos", guardInstance.transform.position);
+        blackBoard.SetValue<float>("wallOffset", 2);
+        blackBoard.SetValue<GameObject[]>("walls", walls);
+        blackBoard.SetValue<NavMeshAgent>("navMeshAgent", agent);
+        tree =
+            new Sequence(
+                new BTCheckOnPlayer(blackBoard),
+                new BTFindCover(blackBoard),
+                new BTGoToCover(blackBoard),
+                new BTThrowSmoke(blackBoard)
+                );
+        Debug.Log(blackBoard.GetValue<Vector3>("coverPosition"));
     }
 
     private void FixedUpdate()
