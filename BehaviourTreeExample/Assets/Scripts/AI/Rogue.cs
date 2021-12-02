@@ -13,7 +13,9 @@ public class Rogue : MonoBehaviour
     private BlackBoard blackBoard;
 
     public GameObject guardInstance;
+    public GameObject playerInstance;
     public GameObject[] walls;
+    public bool isAttacked;
 
     private void Awake()
     {
@@ -25,24 +27,35 @@ public class Rogue : MonoBehaviour
     private void Start()
     {
         //TODO: Create your Behaviour tree here
-        blackBoard.SetValue<bool>("playerAttacked", true); //set to true for debug purposes, change later
-        blackBoard.SetValue<Vector3>("myPos", gameObject.transform.position);
-        blackBoard.SetValue<Vector3>("guardPos", guardInstance.transform.position);
         blackBoard.SetValue<float>("wallOffset", 2);
         blackBoard.SetValue<GameObject[]>("walls", walls);
         blackBoard.SetValue<NavMeshAgent>("navMeshAgent", agent);
-        tree =
+        BTBaseNode protecc =
             new Sequence(
                 new BTCheckOnPlayer(blackBoard),
                 new BTFindCover(blackBoard),
-                new BTGoToCover(blackBoard),
+                new BTWalkToDest(blackBoard),
                 new BTThrowSmoke(blackBoard)
                 );
-        Debug.Log(blackBoard.GetValue<Vector3>("coverPosition"));
+        BTBaseNode follow =
+            new Sequence(
+                new BTCheckPlayerDist(blackBoard),
+                new BTWalkToDest(blackBoard)
+                );
+        tree =
+            new BTSelector(
+                protecc,
+                follow
+                );
+        Debug.Log(blackBoard.GetValue<Vector3>("destination"));
     }
 
     private void FixedUpdate()
     {
+        blackBoard.SetValue<bool>("playerAttacked", isAttacked); //set to true for debug purposes, change later
+        blackBoard.SetValue<Vector3>("myPos", gameObject.transform.position);
+        blackBoard.SetValue<Vector3>("guardPos", guardInstance.transform.position);
+        blackBoard.SetValue<Vector3>("playerPos", playerInstance.transform.position);
         tree?.Run();
     }
 

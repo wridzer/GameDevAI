@@ -2,11 +2,11 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BTGoToCover : BTBaseNode
+public class BTWalkToDest : BTBaseNode
 {
     private BlackBoard blackBoard;
 
-    public BTGoToCover(BlackBoard bb)
+    public BTWalkToDest(BlackBoard bb)
     {
         blackBoard = bb;
     }
@@ -24,7 +24,7 @@ public class BTGoToCover : BTBaseNode
     public override TaskStatus Run()
     {
         Vector3 myPos = blackBoard.GetValue<Vector3>("myPos");
-        Vector3 targetPos = blackBoard.GetValue<Vector3>("coverPosition");
+        Vector3 targetPos = blackBoard.GetValue<Vector3>("destination");
         NavMeshAgent agent = blackBoard.GetValue<NavMeshAgent>("navMeshAgent");
 
         agent.destination = targetPos;

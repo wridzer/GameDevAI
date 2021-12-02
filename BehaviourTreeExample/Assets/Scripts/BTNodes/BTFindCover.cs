@@ -47,7 +47,7 @@ public class BTFindCover : BTBaseNode
 
         Debug.Log(targetPos);
 
-        blackBoard.SetValue<Vector3>("coverPosition", targetPos);
+        blackBoard.SetValue<Vector3>("destination", targetPos);
         return TaskStatus.Success;
     }
 }

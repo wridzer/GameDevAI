@@ -1538,10 +1538,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guardInstance: {fileID: 539429221}
+  playerInstance: {fileID: 1267729044}
   walls:
-  - {fileID: 1832966957}
   - {fileID: 165667809}
-  - {fileID: 1744050385}
 --- !u!1 &1868206819
 GameObject:
   m_ObjectHideFlags: 0
