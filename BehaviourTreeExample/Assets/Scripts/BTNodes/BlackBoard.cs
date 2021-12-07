@@ -6,7 +6,11 @@ using UnityEngine;
 public class BlackBoard
 {
     private Dictionary<string, object> Values = new Dictionary<string, object>();
-    
+
+    public void OnInitialize()
+    {
+
+    }
 
     public T GetValue<T>(string name)
     {

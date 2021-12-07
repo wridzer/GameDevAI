@@ -10,10 +10,18 @@ public class Guard : MonoBehaviour
     private NavMeshAgent agent;
     private Animator animator;
 
+    public AISelector AISelector { get; private set; }
+    public BlackBoard blackBoard { get; private set; }
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
+
+        AISelector = GetComponent<AISelector>();
+        blackBoard = GetComponent<BlackBoard>();
+        //BlackBoard.onInitialized;
+        AISelector.OnInitialize(blackBoard);
     }
 
     private void Start()
