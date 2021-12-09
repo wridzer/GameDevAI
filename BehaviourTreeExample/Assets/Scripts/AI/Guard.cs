@@ -6,12 +6,13 @@ using UnityEngine.AI;
 
 public class Guard : MonoBehaviour
 {
-    private BTBaseNode tree;
     private NavMeshAgent agent;
     private Animator animator;
 
     public AISelector AISelector { get; private set; }
     public BlackBoard blackBoard { get; private set; }
+
+
 
     private void Awake()
     {
@@ -20,7 +21,6 @@ public class Guard : MonoBehaviour
 
         AISelector = GetComponent<AISelector>();
         blackBoard = GetComponent<BlackBoard>();
-        //BlackBoard.onInitialized;
         AISelector.OnInitialize(blackBoard);
     }
 
@@ -31,7 +31,7 @@ public class Guard : MonoBehaviour
 
     private void FixedUpdate()
     {
-        tree?.Run();
+        //tree?.Run();
     }
 
     //private void OnDrawGizmos()

@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class AIBehaviour : MonoBehaviour
 {
     [SerializeField] public UtilityEvaluator[] utilities;
+    private BlackBoard blackBoard;
 
     public void OnInitialize(BlackBoard bb)
     {
@@ -12,6 +13,7 @@ public abstract class AIBehaviour : MonoBehaviour
         {
             utility.OnInitialize(bb);
         }    
+        blackBoard = bb;
     }
 
     public float GetNormalizedScore()
@@ -19,13 +21,9 @@ public abstract class AIBehaviour : MonoBehaviour
         return Mathf.Clamp01(utilities.ToList().Sum(x => x.GetNormalizedScore()) / utilities.Length);
     }
 
-    internal void OnExit()
-    {
-        throw new NotImplementedException();
-    }
+    public virtual void OnExit() { }
 
-    internal void OnEnter()
-    {
-        throw new NotImplementedException();
-    }
+    public virtual void OnEnter() { }
+
+    public virtual void Execute() { }
 }
