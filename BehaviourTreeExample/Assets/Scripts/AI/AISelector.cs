@@ -28,4 +28,9 @@ public class AISelector : MonoBehaviour
 
         }
     }
+
+    public void ExecuteBehaviour()
+    {
+        currentBehaviour.Execute();
+    }
 }

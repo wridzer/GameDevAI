@@ -8,9 +8,12 @@ public class Guard : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Animator animator;
+    [SerializeField] private GameObject playerInstance;
 
     public AISelector AISelector { get; private set; }
     private BlackBoard blackBoard;
+    private FloatValue health;
+    private FloatValue distance;
 
     private Vector3[] petrolPositions = { new Vector3(0, 0, 0), new Vector3(6, 0, -5), new Vector3(6, 0, 8), new Vector3(-6, 0, 0) };
 
@@ -22,21 +25,32 @@ public class Guard : MonoBehaviour
 
         AISelector = GetComponent<AISelector>();
         blackBoard = new BlackBoard();
-        AISelector.OnInitialize(blackBoard);
         blackBoard.SetValue<NavMeshAgent>("navMeshAgent", agent);
         blackBoard.SetValue<Vector3[]>("petrolPoints", petrolPositions);
     }
 
     private void Start()
     {
-        //Create your Behaviour Tree here!
+        health = new FloatValue();
+        health.MaxValue = 100;
+        health.Value = health.MaxValue;
+        blackBoard.SetValue<FloatValue>("health", health);
+
+        distance = new FloatValue();
+        distance.MaxValue = 20;
+        distance.Value = Vector3.Distance(transform.position, playerInstance.transform.position);
+        blackBoard.SetValue<FloatValue>("distance", distance);
+        AISelector.OnInitialize(blackBoard);
     }
 
     private void FixedUpdate()
     {
         //tree?.Run();
+        distance.Value = Vector3.Distance(transform.position, playerInstance.transform.position);
+        blackBoard.SetValue<FloatValue>("distance", distance);
         blackBoard.SetValue<Vector3>("myPos", transform.position);
         AISelector.EvaluateBehaviours();
+        AISelector.ExecuteBehaviour();
     }
 
     //private void OnDrawGizmos()

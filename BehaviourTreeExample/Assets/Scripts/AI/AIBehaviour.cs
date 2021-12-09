@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class AIBehaviour : MonoBehaviour
 {
     [SerializeField] public UtilityEvaluator[] utilities;
-    private BlackBoard blackBoard;
+    protected BlackBoard blackBoard;
 
     public void OnInitialize(BlackBoard bb)
     {

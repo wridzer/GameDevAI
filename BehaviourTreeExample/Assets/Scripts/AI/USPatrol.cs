@@ -6,7 +6,6 @@ using UnityEngine.AI;
 
 public class USPatrol : AIBehaviour
 {
-    private BlackBoard blackBoard;
     private Vector3[] petrolPoints;
     private Vector3 destination;
     private Vector3 myPos;
@@ -15,12 +14,17 @@ public class USPatrol : AIBehaviour
 
     public override void Execute()
     {
-        if (myPos == destination)
+        if(destination == Vector3.zero)
         {
-            pointCounter = pointCounter + 1 % petrolPoints.Length;
+            destination = petrolPoints.ToList().OrderByDescending(x => Vector3.Distance(myPos, x)).First();
+        }
+        if (myPos.x == destination.x && myPos.z == destination.z)
+        {
+            pointCounter = (pointCounter + 1) % petrolPoints.Length;
             destination = petrolPoints[pointCounter];
         }
         navMeshAgent.destination = destination;
+        myPos = blackBoard.GetValue<Vector3>("myPos");
     }
 
     public override void OnEnter()
@@ -29,6 +33,11 @@ public class USPatrol : AIBehaviour
         navMeshAgent = blackBoard.GetValue<NavMeshAgent>("navMeshAgent");
         petrolPoints = blackBoard.GetValue<Vector3[]>("petrolPoints");
         myPos = blackBoard.GetValue<Vector3>("myPos");
-        destination = petrolPoints.ToList().OrderByDescending(x => Vector3.Distance(myPos, x)).First();
+        pointCounter = 0;
+    }
+
+    public override void OnExit()
+    {
+        destination = Vector3.zero;
     }
 }
