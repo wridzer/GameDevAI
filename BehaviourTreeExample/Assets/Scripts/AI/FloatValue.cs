@@ -22,4 +22,6 @@ public class FloatValue
             }
         }
     }
+
+    public float MaxValue { get; internal set; }
 }

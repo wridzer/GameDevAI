@@ -10,7 +10,7 @@ public class AISelector : MonoBehaviour
 
     public void OnInitialize(BlackBoard bb)
     {
-        behaviours = GetComponents<AIBehaviour>();
+        behaviours = gameObject.GetComponents<AIBehaviour>();
         foreach (var bhv in behaviours)
         {
             bhv.OnInitialize(bb);

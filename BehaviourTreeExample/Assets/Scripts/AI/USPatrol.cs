@@ -20,10 +20,12 @@ public class USPatrol : AIBehaviour
             pointCounter = pointCounter + 1 % petrolPoints.Length;
             destination = petrolPoints[pointCounter];
         }
+        navMeshAgent.destination = destination;
     }
 
     public override void OnEnter()
     {
+        Debug.Log("Patrolling");
         navMeshAgent = blackBoard.GetValue<NavMeshAgent>("navMeshAgent");
         petrolPoints = blackBoard.GetValue<Vector3[]>("petrolPoints");
         myPos = blackBoard.GetValue<Vector3>("myPos");

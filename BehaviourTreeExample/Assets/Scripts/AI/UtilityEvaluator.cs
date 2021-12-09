@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class UtilityEvaluator : BaseScriptableObject
+public abstract class UtilityEvaluator : ScriptableObject
 {
     public Type VariableType;
 

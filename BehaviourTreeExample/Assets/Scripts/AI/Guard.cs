@@ -10,8 +10,9 @@ public class Guard : MonoBehaviour
     private Animator animator;
 
     public AISelector AISelector { get; private set; }
-    public BlackBoard blackBoard { get; private set; }
+    private BlackBoard blackBoard;
 
+    private Vector3[] petrolPositions = { new Vector3(0, 0, 0), new Vector3(6, 0, -5), new Vector3(6, 0, 8), new Vector3(-6, 0, 0) };
 
 
     private void Awake()
@@ -20,8 +21,10 @@ public class Guard : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         AISelector = GetComponent<AISelector>();
-        blackBoard = GetComponent<BlackBoard>();
+        blackBoard = new BlackBoard();
         AISelector.OnInitialize(blackBoard);
+        blackBoard.SetValue<NavMeshAgent>("navMeshAgent", agent);
+        blackBoard.SetValue<Vector3[]>("petrolPoints", petrolPositions);
     }
 
     private void Start()
@@ -32,6 +35,8 @@ public class Guard : MonoBehaviour
     private void FixedUpdate()
     {
         //tree?.Run();
+        blackBoard.SetValue<Vector3>("myPos", transform.position);
+        AISelector.EvaluateBehaviours();
     }
 
     //private void OnDrawGizmos()
