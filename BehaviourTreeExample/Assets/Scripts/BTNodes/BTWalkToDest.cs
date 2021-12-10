@@ -26,6 +26,7 @@ public class BTWalkToDest : BTBaseNode
         Vector3 myPos = blackBoard.GetValue<Vector3>("myPos");
         Vector3 targetPos = blackBoard.GetValue<Vector3>("destination");
         NavMeshAgent agent = blackBoard.GetValue<NavMeshAgent>("navMeshAgent");
+        blackBoard.GetValue<GameObject>("text").GetComponent<TextMesh>().text = "Walking towards" + targetPos;
 
         agent.destination = targetPos;
 

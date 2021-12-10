@@ -10,30 +10,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 917000fed9723c14e9fc8b810a48a4d2, type: 3}
-  m_Name: Health
+  m_Name: Distance
   m_EditorClassIdentifier: 
   evaluationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
+      time: 0.000029116636
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: -0.012778893
+      outSlope: -0.012778893
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
+      outWeight: 0.081481725
+    - serializedVersion: 3
+      time: 0.9867936
+      value: 1.0011921
+      inSlope: -0.09196575
+      outSlope: -0.09196575
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.99990296
+      value: 0.0039978027
+      inSlope: -0.063705094
+      outSlope: -0.063705094
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11255158
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  floatName: health
+  floatName: distance

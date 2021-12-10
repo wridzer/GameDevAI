@@ -12,7 +12,8 @@ public class BTCheckOnPlayer : BTBaseNode
 
     public override TaskStatus Run()
     {
-        if(blackBoard.GetValue<bool>("playerAttacked") == true)
+        blackBoard.GetValue<GameObject>("text").GetComponent<TextMesh>().text = "Checking on my friend";
+        if (blackBoard.GetValue<bool>("playerAttacked") == true)
         {
             return TaskStatus.Success;
         }

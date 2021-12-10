@@ -22,6 +22,7 @@ public class BTCheckPlayerDist : BTBaseNode
 
     public override TaskStatus Run()
     {
+        blackBoard.GetValue<GameObject>("text").GetComponent<TextMesh>().text = "Checking distance to player";
         Vector3 playerPos = blackBoard.GetValue<Vector3>("playerPos");
         float stoppingDist = blackBoard.GetValue<float>("stoppingDist");
 

@@ -12,6 +12,7 @@ public class BTThrowSmoke : BTBaseNode
 
     public override TaskStatus Run()
     {
+        blackBoard.GetValue<GameObject>("text").GetComponent<TextMesh>().text = "Trowing smoke";
         Debug.Log("Throwing smoke to: " + blackBoard.GetValue<Vector3>("guardPos"));
         return TaskStatus.Success;
     }

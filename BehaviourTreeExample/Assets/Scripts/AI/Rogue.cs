@@ -11,22 +11,24 @@ public class Rogue : MonoBehaviour
     private NavMeshAgent agent;
     private Animator animator;
     private BlackBoard blackBoard;
+    private bool isAttacked = false;
+    [SerializeField] private GameObject text;
 
     public GameObject guardInstance;
     public GameObject playerInstance;
     public GameObject[] walls;
-    public bool isAttacked;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         blackBoard = new BlackBoard();
+        EventManager<bool>.Subscribe(EventType.PLAYER_ATTACKED, PlayerAttacked);
     }
 
     private void Start()
     {
-        //TODO: Create your Behaviour tree here
+        blackBoard.SetValue<GameObject>("text", text);
         blackBoard.SetValue<float>("wallOffset", 2);
         blackBoard.SetValue<GameObject[]>("walls", walls);
         blackBoard.SetValue<NavMeshAgent>("navMeshAgent", agent);
@@ -47,16 +49,20 @@ public class Rogue : MonoBehaviour
                 protecc,
                 follow
                 );
-        Debug.Log(blackBoard.GetValue<Vector3>("destination"));
     }
 
     private void FixedUpdate()
     {
-        blackBoard.SetValue<bool>("playerAttacked", isAttacked); //set to true for debug purposes, change later
+        blackBoard.SetValue<bool>("playerAttacked", isAttacked);
         blackBoard.SetValue<Vector3>("myPos", gameObject.transform.position);
         blackBoard.SetValue<Vector3>("guardPos", guardInstance.transform.position);
         blackBoard.SetValue<Vector3>("playerPos", playerInstance.transform.position);
         tree?.Run();
+    }
+
+    public void PlayerAttacked(bool _arg1)
+    {
+        isAttacked = _arg1;
     }
 
     //private void OnDrawGizmos()

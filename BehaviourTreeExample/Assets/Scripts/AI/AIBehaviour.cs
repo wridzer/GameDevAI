@@ -6,6 +6,7 @@ public abstract class AIBehaviour : MonoBehaviour
 {
     [SerializeField] public UtilityEvaluator[] utilities;
     protected BlackBoard blackBoard;
+    [SerializeField] private float displayScore;
 
     public void OnInitialize(BlackBoard bb)
     {
@@ -18,7 +19,8 @@ public abstract class AIBehaviour : MonoBehaviour
 
     public float GetNormalizedScore()
     {
-        return Mathf.Clamp01(utilities.ToList().Sum(x => x.GetNormalizedScore()) / utilities.Length);
+        displayScore = Mathf.Clamp01(utilities.ToList().Sum(x => x.GetNormalizedScore()) / utilities.Length);
+        return displayScore;
     }
 
     public virtual void OnExit() { }

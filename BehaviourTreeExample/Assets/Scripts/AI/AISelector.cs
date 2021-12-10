@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -6,7 +7,6 @@ public class AISelector : MonoBehaviour
 {
     private AIBehaviour[] behaviours;
     private AIBehaviour currentBehaviour;
-
 
     public void OnInitialize(BlackBoard bb)
     {

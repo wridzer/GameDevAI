@@ -22,6 +22,7 @@ public class BTFindCover : BTBaseNode
 
     public override TaskStatus Run()
     {
+        blackBoard.GetValue<GameObject>("text").GetComponent<TextMesh>().text = "Looking for cover";
         GameObject closestWall = null;
         float distToWall = float.PositiveInfinity;
         Vector3 myPos = blackBoard.GetValue<Vector3>("myPos");
