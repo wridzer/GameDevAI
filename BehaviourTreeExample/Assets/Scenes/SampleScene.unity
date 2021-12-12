@@ -424,7 +424,7 @@ MonoBehaviour:
   maxHealth: 100
   memoryTimer: 5
   ViewAngleInDegrees: 30
-  SightRange: 10
+  SightRange: 20
   changeHealthSpeed: 5
   text: {fileID: 1286553743}
   healthbar: {fileID: 1003097012}
@@ -527,7 +527,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e8b374c67b82cd542b84ebee1698cf8b, type: 2}
   - {fileID: 11400000, guid: 54aba6c79eb68884399680bf2f81681b, type: 2}
   displayScore: 0
-  stoppingDistance: 4
+  stoppingDistance: 2
 --- !u!114 &539429229
 MonoBehaviour:
   m_ObjectHideFlags: 0

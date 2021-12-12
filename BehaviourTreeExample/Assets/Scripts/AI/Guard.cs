@@ -84,17 +84,17 @@ public class Guard : MonoBehaviour
         AISelector.ExecuteBehaviour();
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Handles.color = Color.yellow;
-        Vector3 endPointLeft = transform.position + (Quaternion.Euler(0, -ViewAngleInDegrees, 0) * transform.forward).normalized * SightRange;
-        Vector3 endPointRight = transform.position + (Quaternion.Euler(0, ViewAngleInDegrees, 0) * transform.forward).normalized * SightRange;
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.yellow;
+    //    Handles.color = Color.yellow;
+    //    Vector3 endPointLeft = transform.position + (Quaternion.Euler(0, -ViewAngleInDegrees, 0) * transform.forward).normalized * SightRange;
+    //    Vector3 endPointRight = transform.position + (Quaternion.Euler(0, ViewAngleInDegrees, 0) * transform.forward).normalized * SightRange;
 
-        Handles.DrawWireArc(transform.position, Vector3.up, Quaternion.Euler(0, -ViewAngleInDegrees, 0) * transform.transform.forward, ViewAngleInDegrees * 2, SightRange);
-        Gizmos.DrawLine(transform.position, endPointLeft);
-        Gizmos.DrawLine(transform.position, endPointRight);
-    }
+    //    Handles.DrawWireArc(transform.position, Vector3.up, Quaternion.Euler(0, -ViewAngleInDegrees, 0) * transform.transform.forward, ViewAngleInDegrees * 2, SightRange);
+    //    Gizmos.DrawLine(transform.position, endPointLeft);
+    //    Gizmos.DrawLine(transform.position, endPointRight);
+    //}
 
     private bool CheckForPlayer()
     {
