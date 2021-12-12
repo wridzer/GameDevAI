@@ -17,10 +17,11 @@ public class USFlee : AIBehaviour
     public override void Execute()
     {
         myPos = blackBoard.GetValue<Vector3>("myPos");
-        if(blackBoard.GetValue<FloatValue>("distance").Value < fleeDist)
+        if(Vector3.Distance(myPos, playerInstance.transform.position) < fleeDist)
         {
             Vector3 direction = (myPos - playerInstance.transform.position).normalized;
-            destination = new Vector3(direction.x * fleeDist, myPos.y, direction.z * fleeDist);
+            destination = direction + myPos;
+            navMeshAgent.destination = destination;
         }
         else
         {

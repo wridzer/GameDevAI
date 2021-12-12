@@ -32,16 +32,17 @@ public class USAttack : AIBehaviour
         if (Vector3.Distance(myPos, destination) < stoppingDistance)
         {
             Attack();
+        } else
+        {
+            destination = blackBoard.GetValue<Vector3>("lastSeenPlayerPos");
+            navMeshAgent.destination = destination;
+            transform.rotation = Quaternion.LookRotation(playerInstance.transform.position - transform.position);
+            myPos = blackBoard.GetValue<Vector3>("myPos");
         }
-        destination = blackBoard.GetValue<Vector3>("lastSeenPlayerPos");
-        navMeshAgent.destination = destination;
-        transform.rotation = Quaternion.LookRotation(playerInstance.transform.position - transform.position);
-        myPos = blackBoard.GetValue<Vector3>("myPos");
     }
 
     private void Attack()
     {
-        Debug.Log("Attacking");
         EventManager<bool>.Invoke(EventType.PLAYER_ATTACKED, true);
     }
 }

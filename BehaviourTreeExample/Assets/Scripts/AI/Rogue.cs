@@ -13,6 +13,7 @@ public class Rogue : MonoBehaviour
     private BlackBoard blackBoard;
     private bool isAttacked = false;
     [SerializeField] private GameObject text;
+    [SerializeField] private GameObject smokeBomb;
 
     public GameObject guardInstance;
     public GameObject playerInstance;
@@ -31,6 +32,7 @@ public class Rogue : MonoBehaviour
         blackBoard.SetValue<GameObject>("text", text);
         blackBoard.SetValue<float>("wallOffset", 2);
         blackBoard.SetValue<GameObject[]>("walls", walls);
+        blackBoard.SetValue<GameObject>("smokeBomb", smokeBomb);
         blackBoard.SetValue<NavMeshAgent>("navMeshAgent", agent);
         BTBaseNode protecc =
             new Sequence(

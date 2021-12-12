@@ -46,8 +46,6 @@ public class BTFindCover : BTBaseNode
         Vector3 dir = (closestWall.transform.position - guardPos).normalized;
         Vector3 targetPos = closestWall.transform.position + (wallOffset * dir);
 
-        Debug.Log(targetPos);
-
         blackBoard.SetValue<Vector3>("destination", targetPos);
         return TaskStatus.Success;
     }

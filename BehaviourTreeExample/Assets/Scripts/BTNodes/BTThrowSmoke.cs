@@ -13,7 +13,8 @@ public class BTThrowSmoke : BTBaseNode
     public override TaskStatus Run()
     {
         blackBoard.GetValue<GameObject>("text").GetComponent<TextMesh>().text = "Trowing smoke";
-        Debug.Log("Throwing smoke to: " + blackBoard.GetValue<Vector3>("guardPos"));
+
+        //Debug.Log("Throwing smoke to: " + blackBoard.GetValue<Vector3>("guardPos"));
         return TaskStatus.Success;
     }
     public override void OnEnter()
@@ -24,5 +25,12 @@ public class BTThrowSmoke : BTBaseNode
     public override void OnExit()
     {
         throw new System.NotImplementedException();
+    }
+
+    private void ThrowBomb()
+    {
+        var smokeBomb = blackBoard.GetValue<GameObject>("smokeBomb");
+        var newBomb = GameObject.Instantiate(smokeBomb, blackBoard.GetValue<Vector3>("myPos"), Quaternion.Euler(new Vector3()));
+        newBomb.GetComponent<Rigidbody>().AddForce(new Vector3(2, 5, 0), ForceMode.Impulse);
     }
 }

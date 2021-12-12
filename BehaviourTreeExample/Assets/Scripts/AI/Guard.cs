@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Guard : MonoBehaviour
 {
@@ -14,7 +15,9 @@ public class Guard : MonoBehaviour
     [SerializeField] private float memoryTimer;
     [SerializeField] private float ViewAngleInDegrees = 30;
     [SerializeField] private float SightRange = 10;
+    [SerializeField] private float changeHealthSpeed = 2;
     [SerializeField] private GameObject text;
+    [SerializeField] private Slider healthbar;
     private bool playerSeen = false;
     private float timer = 0;
 
@@ -62,6 +65,9 @@ public class Guard : MonoBehaviour
 
     private void FixedUpdate()
     {
+        health.Value += Input.GetAxis("Mouse ScrollWheel") * changeHealthSpeed;
+        healthbar.value = health.Value;
+        blackBoard.SetValue<FloatValue>("health", health);
         bool playerSeen = CheckForPlayer();
         blackBoard.SetValue<bool>("playerSeen", playerSeen);
         if (playerSeen)
@@ -118,7 +124,6 @@ public class Guard : MonoBehaviour
             playerSeen = false;
         }
         if (playerSeen) { 
-            Debug.Log("Player seen");
             return true;
         }
         else { return false; }
